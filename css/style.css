@@ -1,4 +1,18 @@
 /* Base Reset and Fonts */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
   background: #f8f9fa;
@@ -6,6 +20,7 @@ body {
   padding: 0;
   color: #212529;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* Header/Footer */
@@ -14,6 +29,9 @@ header, footer {
   color: #ffffff;
   padding: 1rem 2rem;
   text-align: center;
+}
+header {
+  padding-right: 3.5rem; /* add enough space for the button */
 }
 
 header h1 {
@@ -24,6 +42,20 @@ header h1 {
 header p {
   font-size: 1rem;
   margin: 0;
+}
+
+/* Hamburger menu button */
+#menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  z-index: 1100;
 }
 
 /* Layout Container */
@@ -39,20 +71,20 @@ header p {
   width: 280px;
   background: #ffffff;
   border-right: 1px solid #dee2e6;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 1.5rem;
   position: sticky;
   top: 0;
   height: 100vh;
   overflow-y: auto;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease-in-out;
 }
 
 #search {
-  width: 90%;
+  width: 100%;
   padding: 0.5rem;
   border: 1px solid #adb5bd;
   border-radius: 4px;
-  margin-bottom: 1rem;
 }
 
 /* Year Toggle & List */
@@ -73,7 +105,7 @@ header p {
   content: '▶';
   position: absolute;
   left: 0;
-  top:5px;
+  top: 5px;
   transition: transform 0.3s ease;
 }
 
@@ -110,30 +142,67 @@ header p {
 }
 
 /* Main Content */
-/* Timeline container */
 main {
   flex: 1;
   padding: 2rem;
   position: relative;
   max-width: 800px;
-  margin: auto;
 }
 
 /* Vertical timeline line */
-#timeline::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 59px;
-  width: 4px;
-  height: 100%;
-  background: #ccc;
+@media (min-width: 769px) {
+  #timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 59px;
+    width: 4px;
+    height: 100%;
+    background: #ccc;
+  }
 }
+/* Hide search button by default */
+#search-button {
+  display: none;
+  background: #0a2239;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: 1px solid #0a2239;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+#search-button:hover {
+  background: #153755;
+}
+
+
+/* Container for input + button */
+.search-container {
+  display: flex;
+  gap: 0.5rem; /* space between input and button */
+  margin-bottom: 1rem;
+}
+
+/* Style input inside container */
+.search-container #search {
+  flex: 1; /* take available width */
+  padding: 0.5rem;
+  border: 1px solid #adb5bd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+
+
 
 /* Event card style */
 .event {
   position: relative;
-  margin-left: 60px;
+  margin-left: 62px;
+  margin-right: 1rem;       /* Add this */
   margin-bottom: 2rem;
   background: #ffffff;
   padding: 1rem 1.5rem;
@@ -142,20 +211,26 @@ main {
   transition: background 0.2s ease;
   cursor: pointer;
   border: 1px solid #e0e0e0;
+  max-width: calc(100vw - 4rem);  /* Prevent overflow */
+  overflow-wrap: break-word;      /* Break long words */
+  box-sizing: border-box;
 }
 
+
 /* Timeline dot */
-.event::before {
-  content: "";
-  position: absolute;
-  left: -42px;
-  top: 1.2rem;
-  width: 16px;
-  height: 16px;
-  background: #0a2239;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 2px #ccc;
+@media (min-width: 769px) {
+  .event::before {
+    content: "";
+    position: absolute;
+    left: -42px;
+    top: 1.2rem;
+    width: 16px;
+    height: 16px;
+    background: #0a2239;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #ccc;
+  }
 }
 
 /* Title */
@@ -178,7 +253,6 @@ main {
   opacity: 1;
 }
 
-
 /* Image styling */
 .event img {
   max-width: 100%;
@@ -187,8 +261,68 @@ main {
   border-radius: 4px;
 }
 
-
 /* Footer */
 footer {
   font-size: 0.9rem;
+}
+/* Close button inside sidebar */
+#menu-close {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #0a2239;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  z-index: 1101;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #search-button {
+    display: inline-flex;
+  }
+  #container {
+    flex-direction: column;
+  }
+
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    max-width: none;
+    background: #ffffff;
+    transform: translateX(-100%);
+    z-index: 1000;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease-in-out;
+    padding-top: 4rem; /* space for close button */
+
+  }
+
+  #sidebar.open {
+    transform: translateX(0);
+  }
+
+  #menu-toggle {
+    display: block;
+  }
+
+  #menu-close {
+    display: block;
+    margin-right: 1rem;
+  }
+
+  main {
+    padding: 1.5rem;
+  }
+
+  .event {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
 }

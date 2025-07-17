@@ -2,7 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const timeline = document.getElementById("timeline");
   const yearIndex = document.getElementById("year-index");
   const searchInput = document.getElementById("search");
+const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const sidebar = document.getElementById('sidebar');
+  const searchbutton = document.getElementById('search-button');
+  menuToggle.addEventListener('click', () => {
+    menuToggle.style.display = 'none';
+    sidebar.classList.add('open');
+  });
 
+  menuClose.addEventListener('click', () => {
+    menuToggle.style.display = 'block';
+    sidebar.classList.remove('open');
+  });
   let expandedEvent = null;
 
   function expandEvent(card) {
@@ -120,6 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const target = document.getElementById(evt.id);
             if (target) {
               target.scrollIntoView({ behavior: "smooth", block: "start" });
+              sidebar.classList.remove('open');
+              menuToggle.style.display = 'block';
               expandEvent(target); // expand on scroll
             }
           });
@@ -139,6 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       // Search filter
+      searchbutton.addEventListener("click", () => {
+           menuToggle.style.display = 'block';
+    sidebar.classList.remove('open');
+      })
       searchInput.addEventListener("input", () => {
         const q = searchInput.value.toLowerCase();
         document.querySelectorAll(".event").forEach((card) => {
@@ -152,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const updated = document.getElementById("last-updated");
       if (events.length > 0 && updated) {
         // updated.textContent = new Date(events[0].date).toLocaleDateString();
-        updated.textContent = new Date(Date.now()).toLocaleDateString()
+updated.textContent = new Date('2025-07-17').toLocaleDateString();
       }
     });
 });

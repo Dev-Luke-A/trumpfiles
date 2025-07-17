@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2016-11-08",
+    "title": "Donald Trump Elected 45th President",
+    "body": "Donald Trump won the 2016 presidential election, shocking many and signaling a major shift in American politics.",
+    "sources": [
+      "https://www.cnn.com/election/2016/results",
+      "https://edition.cnn.com/2016/11/08/politics/election-day-2016-highlights"
+    ]
+  },
+  {
+    "date": "2021-01-06",
+    "title": "Capitol Riot",
+    "body": "Supporters of President Trump stormed the U.S. Capitol to disrupt the certification of the 2020 presidential election results, threatening the peaceful transfer of power.",
+    "sources": [
+      "https://www.bbc.co.uk/news/world-us-canada-56004916",
+      "https://abcnews.go.com/Politics/capitol-breached-protesters/story?id=75081629"
+    ]
+  },
+  {
+    "date": "2024-11-05",
+    "title": "Donald Trump Elected 47th President",
+    "body": "Donald Trump won the 2024 presidential election, returning to the presidency after his previous term ended in 2021. The election results marked a significant moment in American political history with Trump becoming the first former president to regain the office since Grover Cleveland.",
+    "sources": [
+      "https://edition.cnn.com/election/2024/results/president",
+      "https://www.bbc.co.uk/news/live/czxrnw5qrprt"
+    ]
+  }
+]

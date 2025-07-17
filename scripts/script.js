@@ -39,12 +39,30 @@ const menuToggle = document.getElementById('menu-toggle');
         const card = document.createElement("div");
         card.className = "event";
         card.dataset.title = event.title.toLowerCase();
-        card.dataset.body = event.body.toLowerCase();
+        if (event.body) {
+          card.dataset.body = event.body.toLowerCase();
+        }
+        else {
+          card.dataset.body = '';
+        }
         card.dataset.year = eventYear;
         card.id = `event-${i}`;
 
         const title = document.createElement("h2");
-        title.textContent = `${event.date} — ${event.title}`;
+
+        const formatDate = (dateStr) => {
+          const date = new Date(dateStr);
+          const day = date.getDate();
+          const month = date.toLocaleString('default', {month: 'long'});
+          const year = date.getFullYear();
+          const ordinal = (n) => {
+            const s = ['th', 'st', 'nd', 'rd'];
+            const v = n % 100;
+            return n + (s[(v - 20) % 10] || s[v] || s[0]);
+          };
+          return `${ordinal(day)} ${month} ${year}`;
+        };
+        title.textContent = `${formatDate(event.date)} — ${event.title}`;
 
         const body = document.createElement("div");
         body.className = "body";
@@ -68,16 +86,17 @@ const menuToggle = document.getElementById('menu-toggle');
 
           const sourcesList = document.createElement("ul");
           sourcesList.className = "sources";
-
-          event.sources.forEach((source, index) => {
-            const sourceItem = document.createElement("li");
-            const sourceLink = document.createElement("a");
-            sourceLink.href = source;
-            sourceLink.textContent = source;
-            sourceLink.target = "_blank";
-            sourceItem.appendChild(sourceLink);
-            sourcesList.appendChild(sourceItem);
-          });
+      if (Array.isArray(event.sources) && event.sources.length > 0) {
+            event.sources.forEach((source) => {
+              const sourceItem = document.createElement("li");
+              const sourceLink = document.createElement("a");
+              sourceLink.href = source;
+              sourceLink.textContent = source;
+              sourceLink.target = "_blank";
+              sourceItem.appendChild(sourceLink);
+              sourcesList.appendChild(sourceItem);
+            });
+          }
 
           body.appendChild(sourcesList);
         }
@@ -85,6 +104,10 @@ const menuToggle = document.getElementById('menu-toggle');
         card.appendChild(title);
         card.appendChild(body);
         timeline.appendChild(card);
+        if (i === 0) {
+  card.classList.add("most-recent");
+}
+
       });
 
       // Expand on click

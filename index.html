@@ -1,50 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trump & Democracy: A Factual Timeline</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-  <header>
-    <h1>Trump & Democracy: A Factual Timeline</h1>
-    <p>This site preserves a factual record of threats to American democracy under Donald Trump.</p>
-
-  </header>
-
-  <div id="container">
+<header>
+  <h1>Trump & Democracy: A Factual Timeline</h1>
+  <p>This site preserves a factual record of threats to American democracy under Donald Trump.</p>
+</header>
+<div id="container">
   <div id="menu-row">
     <button id="menu-toggle" aria-label="Open menu">☰</button>
-
   </div>
-
-   <aside id="sidebar">
-  <button id="menu-close" aria-label="Close menu">✖</button>
+  <aside id="sidebar">
+    <button id="menu-close" aria-label="Close menu">✖</button>
     <div class="search-container">
-  <input type="text" id="search" placeholder="Search..." />
-  <button id="search-button" aria-label="Search">Go</button>
+      <input type="text" id="search" placeholder="Search..."/>
+      <button id="search-button" aria-label="Search">Go</button>
+    </div>
+    <nav id="year-index"></nav>
+  </aside>
+  <main id="timeline"></main>
 </div>
-
-
-     <nav id="year-index"></nav>
-</aside>
-
-    <main id="timeline"></main>
-  </div>
-
-  <footer>
-    <p>Last updated: <span id="last-updated"></span></p>
-  </footer>
-
-  <script src="scripts/script.js"></script>
- <script>
-
-</script>
-
-
+<footer>
+  <p>Last updated: <span id="last-updated"></span></p>
+</footer>
+<script src="scripts/script.js"></script>
 </body>
-
 </html>

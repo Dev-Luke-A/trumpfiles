@@ -151,7 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // Last updated label
       const updated = document.getElementById("last-updated");
       if (events.length > 0 && updated) {
-        updated.textContent = new Date(events[0].date).toLocaleDateString();
+        // updated.textContent = new Date(events[0].date).toLocaleDateString();
+        updated.textContent = new Date(Date.now()).toLocaleDateString()
       }
     });
 });
